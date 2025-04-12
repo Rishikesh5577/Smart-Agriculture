@@ -1,0 +1,19 @@
+.para
+{
+    margin-top: 5px;
+}
+.card{
+    background: rgb(247, 244, 247);
+    width: 200;
+    height: 200;
+    margin: 10px;
+    border-radius: 15px;
+}
+.card-image{
+    background-color: rgb(15, 174, 174);
+    height: 150;
+    margin-top: 20px;
+    background-size:cover;
+    border-radius:15px 15px 0 0;
+
+}
