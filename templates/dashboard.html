@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock title %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden; /* Prevent screen scrolling */
+    }
+
+    /* Full-screen background image */
+    .background-container {
+        background: url("{% static 'images/a.jpeg' %}") no-repeat center center fixed;
+        background-size: cover;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Optional dark overlay to improve contrast */
+    .background-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+
+    /* Card style similar to login box */
+    .sidebar {
+        position: relative;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px 30px;
+        width: 350px;
+        color: #fff;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .profile-img {
+        width: 120px;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+    .sidebar h1 {
+        margin: 10px 0 20px;
+        color: #fff;
+    }
+
+    .sidebar h3 {
+        margin: 15px 0;
+    }
+
+    .sidebar a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+        color: #ffefba;
+    }
+
+    hr {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+</style>
+
+<div class="background-container">
+    <div class="sidebar">
+        <img src="{% static 'images/the.jpeg' %}" alt="avatar" class="profile-img">
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        <hr>
+        <h3><a href="{% url 'crop_prediction' %}">Crop Prediction</a></h3>                 
+        <hr>
+        <h3><a href="{% url 'fert_rec' %}">Fertilizer Recommendation</a></h3>                 
+        <hr>
+        <h3><a href="{% url 'chatbot' %}">Chatbot</a></h3>                 
+        <hr>
+        <h3><a href="{% url 'log_out' %}">Log Out</a></h3>
+    </div>
+</div>
+{% endif %}
+{% endblock body %}

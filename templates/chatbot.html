@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Chatbot
+{% endblock title %}
+
+{% block body %}
+<div class="container mt-4">
+    <h3 class="text-center">Chatbot</h3>
+    <div class="chat-container border p-3">
+        <div id="chat-window" class="chat-window">
+            <!-- Chat messages will appear here -->
+        </div>
+        <form id="chat-form" class="mt-3">
+            {% csrf_token %}
+            <div class="input-group">
+                <textarea id="user-input" class="form-control" rows="2" placeholder="Type your query..."></textarea>
+                <button class="btn btn-primary" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('chat-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const inputField = document.getElementById('user-input');
+    const userMessage = inputField.value.trim();
+    const chatWindow = document.getElementById('chat-window');
+
+    if (userMessage) {
+        // Display user message
+        const userMessageElem = document.createElement('div');
+        userMessageElem.className = 'user-message p-2 my-2 rounded bg-primary text-white';
+        userMessageElem.innerText = userMessage;
+        chatWindow.appendChild(userMessageElem);
+
+        // Send request to server
+        const response = await fetch("{% url 'chatbot_api' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: JSON.stringify({ message: userMessage }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            // Display chatbot response
+            const botMessageElem = document.createElement('div');
+            botMessageElem.className = 'bot-message p-2 my-2 rounded bg-secondary text-white';
+            botMessageElem.innerHTML = `<p>${data.response}</p>`;
+            chatWindow.appendChild(botMessageElem);
+
+            // Display links
+            if (data.links && data.links.length) {
+                const linksElem = document.createElement('ul');
+                linksElem.className = 'bot-links';
+                data.links.forEach((link) => {
+                    const linkItem = document.createElement('li');
+                    linkItem.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+                    linksElem.appendChild(linkItem);
+                });
+                chatWindow.appendChild(linksElem);
+            }
+        }
+
+        // Clear the input field
+        inputField.value = '';
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+});
+</script>
+
+<style>
+.chat-container {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+.chat-window {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.user-message {
+    text-align: right;
+}
+.bot-message {
+    text-align: left;
+}
+.bot-links {
+    list-style-type: none;
+    padding: 0;
+}
+</style>
+{% endblock body %}

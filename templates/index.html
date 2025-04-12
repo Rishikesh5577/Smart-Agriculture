@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .navbar {
+    background-color: #1a472a;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar .brand {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .navbar .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .navbar .nav-links a:hover {
+    color: #f8d210;
+  }
+
+  .banner_section {
+    background: url("{% static 'images/fav.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    width: 100vw;
+    height: calc(100vh - 65px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    padding-left: 60px;
+    overflow: hidden;
+  }
+
+  .overlay {
+    background: rgba(145, 130, 130, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .content-box {
+    position: relative;
+    color: rgb(209, 236, 234);
+    text-align: left;
+    z-index: 2;
+    max-width: 600px;
+    padding: 20px 20px 20px 0;
+  }
+
+  .content-box h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+  }
+
+  .content-box p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .btn {
+    background: #28a745;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: #218838;
+  }
+</style>
+
+<!-- Navbar -->
+<div class="navbar">
+  <a href="#" class="brand">Smart Agriculture</a>
+  <div class="nav-links">
+    <a href="log_in">Log In</a>
+    <a href="register">Register</a>
+  </div>
+</div>
+
+<!-- Banner Section -->
+<div class="banner_section">
+  <div class="overlay"></div>
+  <div class="content-box">
+    <h1>Crop Prediction and Fertilizer Recommendation</h1>
+    <p>
+      We focus on using modern technologies like IoT sensors, 
+      automation, and data analytics to monitor and optimize farming processes.
+    </p>
+  </div>
+</div>
+
+{% endblock %}

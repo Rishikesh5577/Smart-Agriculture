@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}
+  Report
+{% endblock %}
+{% block body %}
+  <div class="row col-lg-12">
+    <div class="col-lg-3 bg-light d-none d-md-block sidebar">
+      <div class="container-fluide">
+        <div class="mb-1" style="background-color: #f6cbce; height:600px;">
+          <div class="text-center">
+            <img src="/static/images/the.jpeg" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; margin-top: 30px;" />
+            <h1 class="mt-3 mb-3" style="color:rgb(0, 0, 0);">{{ first_name }} {{ last_name }}</h1>
+            <hr color="black" />
+
+            <h3><i class="Crop_Pre"></i><a href="crop_prediction" style="color:rgb(6, 2, 2);">Crop Prediction</a></h3>
+            <hr color="black" />
+            <h3><i class="Fert_Pre"></i><a href="fert_rec" style="color:rgb(6, 2, 2);">Fertilizer Recommendation</a></h3>
+            <hr color="black" />
+            <h3><a href="log_out" style="color:rgb(16, 4, 4);">Log Out</a></h3>
+            <hr color="black" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="mb-1" style="height:600px;">
+        <h1 class="ballet_text mt-1" style="color:#007406;"><b>Crop Report</b></h1>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div class="text-center">
+            <div class="row" style="height:450px;overflow: auto;">
+              <div class="col-md-10 m-auto">
+                <div class="mail_section">
+                  <table class="table text-left">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Farmer Name :</th>
+                        <td>{{ crop_data.farmer_name }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Contact Number :</th>
+                        <td>{{ crop_data.contact_no }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Ratio of Nitrogen Content :</th>
+                        <td colspan="2">{{ crop_data.n }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Ratio of Phosphorous Content :</th>
+                        <td colspan="2">{{ crop_data.p }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Ratio of Potassium Content :</th>
+                        <td colspan="2">{{ crop_data.k }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Temperature (in degree Celsius) :</th>
+                        <td colspan="2">{{ crop_data.temperature }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Humidity (in %) :</th>
+                        <td colspan="2">{{ crop_data.humidity }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">pH Value of Soil (0-14) :</th>
+                        <td colspan="2">{{ crop_data.ph }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Rainfall (in mm) :</th>
+                        <td colspan="2">{{ crop_data.rainfall }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <h3><b>{{ crop_data.prediction }}</b></h3>
+                        </th>
+                        <td colspan="2"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <button type="submit" style="margin-top: 20px;" class="btn btn-success">Download Report</button>
+            <a style="margin-top: 20px;" class="btn btn-dark" href="dashboard">Go to Dashboard</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

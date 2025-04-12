@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Crop_Report{% endblock title %}
+{% block body %}
+
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-mb-6">
+        <h4 style="font-size: 18px;">Crop Recommendation Report</h4>
+        <table class="table text-left">
+          <tbody>
+            <tr>
+              <th>Farmer Name :</th>
+              <td>{{ crop_data.farmer_name }}</td>
+            </tr>
+            <tr>
+              <th>Contact Number :</th>
+              <td>{{ crop_data.contact_no }}</td>
+            </tr>
+            <tr>
+              <th>Ratio of Nitrogen Content :</th>
+              <td colspan="2">{{ crop_data.n }}</td>
+            </tr>
+            <tr>
+              <th>Ratio of Phosphorous Content :</th>
+              <td colspan="2">{{ crop_data.p }}</td>
+            </tr>
+            <tr>
+              <th>Ratio of Potassium Content :</th>
+              <td colspan="2">{{ crop_data.k }}</td>
+            </tr>
+            <tr>
+              <th>Temperature (in degree Celsius) :</th>
+              <td colspan="2">{{ crop_data.temperature }}</td>
+            </tr>
+            <tr>
+              <th>Humidity (in %) :</th>
+              <td colspan="2">{{ crop_data.humidity }}</td>
+            </tr>
+            <tr>
+              <th>pH Value of Soil (0-14) :</th>
+              <td colspan="2">{{ crop_data.ph }}</td>
+            </tr>
+            <tr>
+              <th>Rainfall (in mm) :</th>
+              <td colspan="2">{{ crop_data.rainfall }}</td>
+            </tr>
+            <tr>
+              <th>
+                <h3><b>{{ crop_data.prediction }}</b></h3>
+              </th>
+              <td colspan="2"></td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
