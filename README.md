@@ -1,6 +1,6 @@
 # Smart Agriculture (Django)
 
-Smart Agriculture is an IoT + Machine Learning web app for crop prediction and fertilizer recommendation. It uses real-time or user-provided inputs, ML models, and a simple chatbot to assist farmers and agronomists.
+Smart Agriculture is an IoT + Machine Learning web app for crop prediction and fertilizer recommendation. It uses real-time data from ThingSpeak or user-provided inputs, ML models, and a simple chatbot to assist farmers and agronomists. The system fetches sensor data directly from ThingSpeak's API, eliminating the need for direct hardware connections.
 
 ## Features
 - **User auth**: Register, login, dashboard.
