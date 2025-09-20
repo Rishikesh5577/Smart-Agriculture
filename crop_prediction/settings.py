@@ -56,7 +56,7 @@ ROOT_URLCONF = 'crop_prediction.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR , "templates"],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,7 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # manually change
 STATICFILES_DIRS = [
-    BASE_DIR , "static/"
+    BASE_DIR / "static"
 ]
 
 MESSAGE_TAGS = {
@@ -134,9 +134,15 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'success'
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com' 
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'projectpanel9@gmail.com'
-EMAIL_HOST_PASSWORD = 'nnqn onee tvet lixv'
+# Development email backend: print emails to console to avoid SMTP issues on Python 3.13
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# If you want to re-enable Gmail SMTP in production, uncomment and configure below:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# # Use SSL to avoid Python 3.13 incompatibility with starttls keyfile args
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = True
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'projectpanel9@gmail.com')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')

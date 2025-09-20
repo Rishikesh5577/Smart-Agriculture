@@ -57,10 +57,20 @@ def register(request):
         # Validate user input
         verify = authentication(first_name, last_name, password, password1, phone_number)
         if verify == "success":
-            user = User.objects.create_user(username, password, password1)  # create_user
-            user.first_name = first_name
-            user.last_name = last_name
-            user.save()
+            # Prevent duplicate usernames (email)
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "This email/username is already registered. Please log in or use another email.")
+                return redirect("register")
+
+            try:
+                # Correctly create user: username and password as keyword args; use username as email
+                user = User.objects.create_user(username=username, password=password, email=username)  # create_user
+                user.first_name = first_name
+                user.last_name = last_name
+                user.save()
+            except Exception as e:
+                messages.error(request, f"Could not create account: {e}")
+                return redirect("register")
 
             # Send confirmation email
             subject = 'Account Created Successfully'
